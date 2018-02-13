@@ -40,7 +40,7 @@ public class Persistencia {
         BufferedReader br = null;
         try{
             br = new BufferedReader(new FileReader(path));
-            System.out.println("Leitura realidada!");
+            System.out.println("Leitura realizada!");
         } catch (IOException ex) {
             ex.getStackTrace();
         }

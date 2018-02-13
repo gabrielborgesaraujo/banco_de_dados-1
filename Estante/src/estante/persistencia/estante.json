@@ -1,5 +1,5 @@
 {
-  "totalDeRevistas": 2,
+  "totalDeRevistas": 3,
   "revitas": [
     {
       "nome": "Veja",
@@ -74,6 +74,38 @@
             "TRF4",
             "Prisão",
             "Tríplex"
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Veja",
+      "manchete": "República de quadrilhas",
+      "edicao": 2548,
+      "editora": {
+        "nome": "Abril"
+      },
+      "editorial": "Diversas",
+      "data": {
+        "year": 2017,
+        "month": 9,
+        "day": 20
+      },
+      "artigos": [
+        {
+          "titulo": "A pátria das quadrilhas",
+          "autores": [
+            {
+              "nome": "Da Redação"
+            }
+          ],
+          "palavrasChave": [
+            "Investigações",
+            "Criminosas",
+            "JBS",
+            "Lula",
+            "Temer",
+            "Lava-jato"
           ]
         }
       ]
