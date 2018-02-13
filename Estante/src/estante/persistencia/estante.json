@@ -1,0 +1,82 @@
+{
+  "totalDeRevistas": 2,
+  "revitas": [
+    {
+      "nome": "Veja",
+      "manchete": "Assassinato na lava-jato",
+      "edicao": 2568,
+      "editora": {
+        "nome": "Abril"
+      },
+      "editorial": "Diversos",
+      "data": {
+        "year": 2018,
+        "month": 2,
+        "day": 7
+      },
+      "artigos": [
+        {
+          "titulo": "A misteriosa execu��o do ex-vice-prefeito do PT que delatou seus comparsas na investiga��o do esc�ndalo de corrup��o na Petrobras",
+          "autores": [
+            {
+              "nome": "Thiago Bonzatto"
+            }
+          ],
+          "palavrasChave": [
+            "PT",
+            "Roberto",
+            "Bahia",
+            "Assassinato",
+            "Corrup��o",
+            "Petrobras"
+          ]
+        },
+        {
+          "titulo": "Cai desaprova��o a candidatos ao Pal�cio do Planalto, exceto Lula",
+          "autores": [
+            {
+              "nome": "Estad�o Conte�do"
+            }
+          ],
+          "palavrasChave": [
+            "Lula",
+            "Planalto",
+            "Elei��o",
+            "Desaprova��o"
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Veja",
+      "manchete": "O que falta para Lula ser preso",
+      "edicao": 2567,
+      "editora": {
+        "nome": "Abril"
+      },
+      "editorial": "Diversos",
+      "data": {
+        "year": 2018,
+        "month": 1,
+        "day": 31
+      },
+      "artigos": [
+        {
+          "titulo": "Perdeu por nocaute",
+          "autores": [
+            {
+              "nome": "Larissa Borges"
+            }
+          ],
+          "palavrasChave": [
+            "Lula",
+            "Concenado",
+            "TRF4",
+            "Prisão",
+            "Tríplex"
+          ]
+        }
+      ]
+    }
+  ]
+}
