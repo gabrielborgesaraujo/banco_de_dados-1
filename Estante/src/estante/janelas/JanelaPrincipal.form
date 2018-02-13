@@ -100,7 +100,7 @@
                           <Component id="jButton6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonCadastrarRevista" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButtonExibirRevista" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton7" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -118,7 +118,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonExibirRevista" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -143,12 +143,12 @@
                 <Property name="text" type="java.lang.String" value="Editar Revista"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonExibirRevista">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Exibir Revista"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExibirRevistaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

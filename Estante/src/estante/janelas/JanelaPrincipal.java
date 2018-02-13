@@ -38,7 +38,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jButtonCadastrarRevista = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonExibirRevista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,10 +59,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jButton7.setText("Editar Revista");
 
-        jButton1.setText("Exibir Revista");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExibirRevista.setText("Exibir Revista");
+        jButtonExibirRevista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonExibirRevistaActionPerformed(evt);
             }
         });
 
@@ -76,7 +76,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addComponent(jButtonCadastrarRevista)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExibirRevista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -90,7 +90,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton7)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonExibirRevista)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -146,12 +146,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         System.out.println(estante);
     }//GEN-LAST:event_jButtonCadastrarRevistaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonExibirRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirRevistaActionPerformed
         // TODO add your handling code here:
-        //estante.pesquisarRevistasPorNome("Tititi");
-        //estante.pesquisarRevistasPorEditora("Abril");
-        //estante.pesquisarRevistasPorDataDePublicacao(LocalDate.of(2018, 1, 31));
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JanelaExibicao janelaExibicao = new JanelaExibicao(this);
+        janelaExibicao.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonExibirRevistaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,10 +189,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonCadastrarRevista;
+    private javax.swing.JButton jButtonExibirRevista;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
