@@ -5,12 +5,19 @@
  */
 package estante.janelas;
 
+import estante.classes.Artigo;
+import estante.classes.Autor;
+import estante.classes.Revista;
+import java.util.LinkedList;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Flavia
  */
 public class JanelaExibicao extends javax.swing.JFrame {
     JanelaPrincipal janelaPrincipal;
+    LinkedList listaLigada = new LinkedList();
+    int indexAtual = 0;
     
     /**
      * Creates new form JanelaExibicao
@@ -18,8 +25,36 @@ public class JanelaExibicao extends javax.swing.JFrame {
     public JanelaExibicao(JanelaPrincipal janelaPrincipal) {
         initComponents();
         this.janelaPrincipal = janelaPrincipal;
+        exibirListaLigadaDeRevistas();
+        
+        
     }
-
+    
+    public void exibirListaLigadaDeRevistas(){
+        for(Revista r : this.janelaPrincipal.estante.getRevitas()){
+            listaLigada.add(r);
+        }
+        Revista r = (Revista) this.listaLigada.get(this.indexAtual);
+        this.jTextFieldNomeDaRevista.setText(r.getNome());
+        this.jTextFieldMancheteDaRevista.setText(r.getManchete());
+        this.jTextFieldDiaDaPublicacao.setText(String.valueOf(r.getData().getDayOfMonth()));
+        this.jTextFieldMesDaPublicacao.setText(String.valueOf(r.getData().getMonthValue()));
+        this.jTextFieldAnoDaPublicacao.setText(String.valueOf(r.getData().getYear()));
+        this.jTextFieldNumeroDaEdicao.setText(String.valueOf(r.getEdicao()));
+        this.jTextFieldNomeDaEditora.setText(r.getEditora().getNome());
+        this.jTextFieldEditorial.setText(r.getEditorial());
+        //Modelo da Tabela
+        DefaultTableModel modeloDaLinha = (DefaultTableModel) this.jTableArtigosDaRevista.getModel();
+        for(Artigo a : r.getArtigos()){
+            StringBuilder autores = new StringBuilder();
+            StringBuilder palavras = new StringBuilder();
+            for(Autor aut : a.getAutores()) autores.append(aut.getNome()).append(", ");
+            for(String pal : a.getPalavrasChave()) palavras.append(pal).append(", ");
+            modeloDaLinha.addRow(new Object[]{a.getTitulo(), autores, palavras});
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,10 +86,10 @@ public class JanelaExibicao extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableArtigosDaRevista = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonProximaRevista = new javax.swing.JButton();
+        jButtonAnteriorRevista = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Dados da Revista");
@@ -93,12 +128,17 @@ public class JanelaExibicao extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableArtigosDaRevista);
 
-        jButton1.setText("Próxima");
-
-        jButton2.setText("Anterior");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonProximaRevista.setText("Próxima");
+        jButtonProximaRevista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonProximaRevistaActionPerformed(evt);
+            }
+        });
+
+        jButtonAnteriorRevista.setText("Anterior");
+        jButtonAnteriorRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnteriorRevistaActionPerformed(evt);
             }
         });
 
@@ -153,9 +193,9 @@ public class JanelaExibicao extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(jButtonAnteriorRevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonProximaRevista)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -197,8 +237,8 @@ public class JanelaExibicao extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
+                            .addComponent(jButtonAnteriorRevista)
+                            .addComponent(jButtonProximaRevista))
                         .addContainerGap())))
         );
 
@@ -226,13 +266,64 @@ public class JanelaExibicao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAnoDaPublicacaoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAnteriorRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorRevistaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(this.indexAtual > 0){
+            this.indexAtual--;
+            Revista r = (Revista) this.listaLigada.get(this.indexAtual);
+            this.jTextFieldNomeDaRevista.setText(r.getNome());
+            this.jTextFieldMancheteDaRevista.setText(r.getManchete());
+            this.jTextFieldDiaDaPublicacao.setText(String.valueOf(r.getData().getDayOfMonth()));
+            this.jTextFieldMesDaPublicacao.setText(String.valueOf(r.getData().getMonthValue()));
+            this.jTextFieldAnoDaPublicacao.setText(String.valueOf(r.getData().getYear()));
+            this.jTextFieldNumeroDaEdicao.setText(String.valueOf(r.getEdicao()));
+            this.jTextFieldNomeDaEditora.setText(r.getEditora().getNome());
+            this.jTextFieldEditorial.setText(r.getEditorial());
+            //Modelo da Tabela
+            DefaultTableModel modeloDaLinha = (DefaultTableModel) this.jTableArtigosDaRevista.getModel();
+            while (this.jTableArtigosDaRevista.getModel().getRowCount() > 0)
+                modeloDaLinha.removeRow(0);
+            for(Artigo a : r.getArtigos()){
+                StringBuilder autores = new StringBuilder();
+                StringBuilder palavras = new StringBuilder();
+                for(Autor aut : a.getAutores()) autores.append(aut.getNome()).append(", ");
+                for(String pal : a.getPalavrasChave()) palavras.append(pal).append(", ");
+                modeloDaLinha.addRow(new Object[]{a.getTitulo(), autores, palavras});
+            }
+        }
+    }//GEN-LAST:event_jButtonAnteriorRevistaActionPerformed
+
+    private void jButtonProximaRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximaRevistaActionPerformed
+        // TODO add your handling code here:
+        if(this.indexAtual < this.listaLigada.size()-1){
+            this.indexAtual++;
+            Revista r = (Revista) this.listaLigada.get(this.indexAtual);
+            this.jTextFieldNomeDaRevista.setText(r.getNome());
+            this.jTextFieldMancheteDaRevista.setText(r.getManchete());
+            this.jTextFieldDiaDaPublicacao.setText(String.valueOf(r.getData().getDayOfMonth()));
+            this.jTextFieldMesDaPublicacao.setText(String.valueOf(r.getData().getMonthValue()));
+            this.jTextFieldAnoDaPublicacao.setText(String.valueOf(r.getData().getYear()));
+            this.jTextFieldNumeroDaEdicao.setText(String.valueOf(r.getEdicao()));
+            this.jTextFieldNomeDaEditora.setText(r.getEditora().getNome());
+            this.jTextFieldEditorial.setText(r.getEditorial());
+            //Modelo da Tabela
+            DefaultTableModel modeloDaLinha = (DefaultTableModel) this.jTableArtigosDaRevista.getModel();
+            while (this.jTableArtigosDaRevista.getModel().getRowCount() > 0)
+                modeloDaLinha.removeRow(0);
+            for(Artigo a : r.getArtigos()){
+                StringBuilder autores = new StringBuilder();
+                StringBuilder palavras = new StringBuilder();
+                for(Autor aut : a.getAutores()) autores.append(aut.getNome()).append(", ");
+                for(String pal : a.getPalavrasChave()) palavras.append(pal).append(", ");
+                modeloDaLinha.addRow(new Object[]{a.getTitulo(), autores, palavras});
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonProximaRevistaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAnteriorRevista;
+    private javax.swing.JButton jButtonProximaRevista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
