@@ -363,63 +363,69 @@ public class JanelaExibicaoEditar extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         int count;
-        /*this.janelaPrincipal.estante.getRevitas().remove(this.indexAtual2);
-        this.janelaPrincipal.estante.setTotalDeRevistas(this.janelaPrincipal.estante.getTotalDeRevistas()-1);*/
         for(count = 0 ; count < this.janelaPrincipal.estante.getTotalDeRevistas(); count++){
-        if(this.janelaPrincipal.estante.getRevitas().get(count) == listaLigada.get(this.indexAtual2))
-        {
-            if(this.jTextFieldNomeDaRevista.getText().isEmpty() 
-                || this.jTextFieldMancheteDaRevista.getText().isEmpty()
-                || this.jTextFieldNumeroDaEdicao.getText().isEmpty()
-                || this.jTextFieldNomeDaEditora.getText().isEmpty()
-                || this.jTextFieldEditorial.getText().isEmpty()
-                || this.jTextFieldAnoDaPublicacao.getText().isEmpty()
-                || this.jTextFieldMesDaPublicacao.getText().isEmpty()
-                || this.jTextFieldDiaDaPublicacao.getText().isEmpty()){
-            // show a joptionpane dialog using showMessageDialog
-            JFrame frame = new JFrame("Edição");
-            JOptionPane.showMessageDialog(frame,
-                "Existem campos em branco na janela de cadastro",
-                "Edição",
-                JOptionPane.ERROR_MESSAGE);
-            //this.setVisible(false);
-        }else
+            if(this.janelaPrincipal.estante.getRevitas().get(count) == listaLigada.get(this.indexAtual2))
             {
-                List<Artigo> artigos = new ArrayList<>();
-                Artigo artigo = new Artigo();
-                for(int x = 0; x < this.jTableArtigosDaRevista.getRowCount(); x++){
-                artigo.setTitulo(this.jTableArtigosDaRevista.getValueAt(x, 0).toString());
-
-                String[] splitAutores = String.valueOf(this.jTableArtigosDaRevista.getValueAt(x, 1)).split(Pattern.quote(", "));
-                for(String nome : splitAutores){
-                    artigo.getAutores().add(new Autor(nome));
-                }
-
-                String[] splitPalavrasChave = String.valueOf(this.jTableArtigosDaRevista.getValueAt(x, 2)).split(Pattern.quote(", "));
-                for(String palavra : splitPalavrasChave){
-                    artigo.getPalavrasChave().add(palavra);
-                }
-                artigos.add(artigo);
-            }
-                Revista revistaTemp = this.janelaPrincipal.estante.editarRevistaDaEstante(this.jTextFieldNomeDaRevista.getText(),
+                if(this.jTextFieldNomeDaRevista.getText().isEmpty() 
+                    || this.jTextFieldMancheteDaRevista.getText().isEmpty()
+                    || this.jTextFieldNumeroDaEdicao.getText().isEmpty()
+                    || this.jTextFieldNomeDaEditora.getText().isEmpty()
+                    || this.jTextFieldEditorial.getText().isEmpty()
+                    || this.jTextFieldAnoDaPublicacao.getText().isEmpty()
+                    || this.jTextFieldMesDaPublicacao.getText().isEmpty()
+                    || this.jTextFieldDiaDaPublicacao.getText().isEmpty()){
+            // show a joptionpane dialog using showMessageDialog
+                    JFrame frame = new JFrame("Edição");
+                    JOptionPane.showMessageDialog(frame,
+                    "Existem campos em branco na janela de cadastro",
+                    "Edição",
+                    JOptionPane.ERROR_MESSAGE);
+            //this.setVisible(false);
+                
+                }else
+                {
+                    int x;
+                    List <Artigo> artigos = new ArrayList<Artigo>();
+                    Artigo artigo = new Artigo();
+                    for(x = 0 ; x<this.jTableArtigosDaRevista.getRowCount(); x++){
+                        artigo = editaArtigo(x);
+                        artigos.add(artigo);
+                    }
+                    Revista revistaTemp = this.janelaPrincipal.estante.editarRevistaDaEstante(this.jTextFieldNomeDaRevista.getText(),
                     this.jTextFieldMancheteDaRevista.getText(),
                     Integer.parseInt(this.jTextFieldNumeroDaEdicao.getText()),
                     new Editora(this.jTextFieldNomeDaEditora.getText()),
                     this.jTextFieldEditorial.getText(),
                     LocalDate.of(Integer.parseInt(this.jTextFieldAnoDaPublicacao.getText()),
                         Integer.parseInt(this.jTextFieldMesDaPublicacao.getText()),
-                        Integer.parseInt(this.jTextFieldDiaDaPublicacao.getText())),
-                    artigos);
-                this.janelaPrincipal.estante.getRevitas().set(count, revistaTemp);
-                break;
+                        Integer.parseInt(this.jTextFieldDiaDaPublicacao.getText())),artigos);
+                    this.janelaPrincipal.estante.getRevitas().set(count, revistaTemp);
+                    
+                    
+                }
             }
-        }
         }
         Persistencia persistencia = new Persistencia();
         persistencia.gravacaoESerializacaoDaInstancia(this.janelaPrincipal.estante, "src\\estante\\persistencia\\estante.json");
         this.dispose();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+    public Artigo editaArtigo(int x)
+    {
+        
+        Artigo artigo = new Artigo();
+            
+            artigo.setTitulo(this.jTableArtigosDaRevista.getValueAt(x, 0).toString());
+            String[] splitAutores = String.valueOf(this.jTableArtigosDaRevista.getValueAt(x, 1)).split(Pattern.quote(", "));
+            for(String nome : splitAutores){
+                artigo.getAutores().add(new Autor(nome));
+            }
 
+            String[] splitPalavrasChave = String.valueOf(this.jTableArtigosDaRevista.getValueAt(x, 2)).split(Pattern.quote(", "));
+            for(String palavra : splitPalavrasChave){
+                artigo.getPalavrasChave().add(palavra);
+            }
+            return artigo;
+    }
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
